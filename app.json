@@ -1,0 +1,40 @@
+{
+  "name": "BibleApp",
+  "description": "A comprehensive Progressive Web App Bible platform",
+  "repository": "https://github.com/your-username/bible-app",
+  "keywords": ["bible", "pwa", "react", "nodejs"],
+  "env": {
+    "DATABASE_URL": {
+      "description": "PostgreSQL database connection string",
+      "required": true
+    },
+    "SESSION_SECRET": {
+      "description": "Secret key for session management",
+      "generator": "secret"
+    },
+    "NODE_ENV": {
+      "description": "Node environment",
+      "value": "production"
+    },
+    "ISSUER_URL": {
+      "description": "OIDC issuer URL for authentication",
+      "value": "https://replit.com/oidc"
+    },
+    "REPL_ID": {
+      "description": "Replit application ID for authentication",
+      "required": true
+    },
+    "REPLIT_DOMAINS": {
+      "description": "Comma-separated list of domains for authentication",
+      "required": true
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "addons": [
+    "heroku-postgresql:mini"
+  ]
+}

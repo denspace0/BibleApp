@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/hooks/useAuth";
+import type { User } from "@shared/schema";
 import { useTheme } from "@/components/ThemeProvider";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -22,7 +23,7 @@ export default function AppHeader({ onToggleSidebar, onOpenSearch }: AppHeaderPr
   const [currentLanguage, setCurrentLanguage] = useState("EN");
 
   const userInitials = user ? 
-    `${user.firstName?.[0] || ''}${user.lastName?.[0] || ''}`.toUpperCase() || 'U' :
+    `${(user as User).firstName?.[0] || ''}${(user as User).lastName?.[0] || ''}`.toUpperCase() || 'U' :
     'U';
 
   const toggleLanguage = () => {
@@ -112,7 +113,7 @@ export default function AppHeader({ onToggleSidebar, onOpenSearch }: AppHeaderPr
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="p-1" data-testid="dropdown-user">
                   <Avatar className="w-8 h-8">
-                    <AvatarImage src={user?.profileImageUrl || undefined} alt={user?.firstName || "User"} />
+                    <AvatarImage src={(user as User)?.profileImageUrl || undefined} alt={(user as User)?.firstName || "User"} />
                     <AvatarFallback className="bg-gradient-to-br from-bible-primary to-bible-secondary text-white text-sm">
                       {userInitials}
                     </AvatarFallback>
@@ -122,14 +123,14 @@ export default function AppHeader({ onToggleSidebar, onOpenSearch }: AppHeaderPr
               <DropdownMenuContent align="end" className="w-56">
                 <div className="flex items-center space-x-2 p-2">
                   <Avatar className="w-8 h-8">
-                    <AvatarImage src={user?.profileImageUrl || undefined} alt={user?.firstName || "User"} />
+                    <AvatarImage src={(user as User)?.profileImageUrl || undefined} alt={(user as User)?.firstName || "User"} />
                     <AvatarFallback className="bg-gradient-to-br from-bible-primary to-bible-secondary text-white text-xs">
                       {userInitials}
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-medium">{user?.firstName} {user?.lastName}</p>
-                    <p className="text-xs text-muted-foreground">{user?.email}</p>
+                    <p className="text-sm font-medium">{(user as User)?.firstName} {(user as User)?.lastName}</p>
+                    <p className="text-xs text-muted-foreground">{(user as User)?.email}</p>
                   </div>
                 </div>
                 <DropdownMenuSeparator />

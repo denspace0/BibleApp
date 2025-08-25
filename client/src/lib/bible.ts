@@ -169,7 +169,7 @@ export function getBookName(bookId: number, language: 'en' | 'tl' = 'en'): strin
 
 export function getTestament(bookId: number): 'old' | 'new' | null {
   const book = BIBLE_BOOKS.find((_, index) => index + 1 === bookId);
-  return book?.testament || null;
+  return book?.testament as 'old' | 'new' || null;
 }
 
 export function getChapterCount(bookId: number): number {

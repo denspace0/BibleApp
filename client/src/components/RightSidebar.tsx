@@ -141,7 +141,7 @@ export default function RightSidebar() {
                         {bookmark.verseText.substring(0, 50)}...
                       </p>
                       <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-                        {new Date(bookmark.createdAt).toLocaleDateString()}
+                        {bookmark.createdAt ? new Date(bookmark.createdAt).toLocaleDateString() : 'Recently'}
                       </p>
                     </div>
                   </div>

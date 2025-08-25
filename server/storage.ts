@@ -169,13 +169,25 @@ export class DatabaseStorage implements IStorage {
 
   // Highlight operations
   async getUserHighlights(userId: string, bookId?: number, chapter?: number): Promise<Highlight[]> {
-    let query = db.select().from(highlights).where(eq(highlights.userId, userId));
-    
     if (bookId && chapter) {
-      query = query.where(and(eq(highlights.bookId, bookId), eq(highlights.chapter, chapter)));
+      return await db
+        .select()
+        .from(highlights)
+        .where(
+          and(
+            eq(highlights.userId, userId),
+            eq(highlights.bookId, bookId),
+            eq(highlights.chapter, chapter)
+          )
+        )
+        .orderBy(highlights.verse);
     }
     
-    return await query.orderBy(highlights.verse);
+    return await db
+      .select()
+      .from(highlights)
+      .where(eq(highlights.userId, userId))
+      .orderBy(highlights.verse);
   }
 
   async createHighlight(highlight: InsertHighlight): Promise<Highlight> {
