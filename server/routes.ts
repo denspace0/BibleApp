@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { setupAuth, isAuthenticated } from "./replitAuth";
 import { insertBookmarkSchema, insertHighlightSchema, insertReadingProgressSchema, insertPrayerRequestSchema } from "@shared/schema";
+import { BibleAPIService } from "./bibleAPI";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Auth middleware
@@ -71,7 +72,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const bookId = parseInt(req.params.bookId);
       const chapter = parseInt(req.params.chapter);
       
-      const verses = await storage.getBibleVerses(bookId, chapter);
+      // First try to get from database
+      let verses = await storage.getBibleVerses(bookId, chapter);
+      
+      // If no verses in database, fetch from external API
+      if (verses.length === 0) {
+        try {
+          const bookName = BibleAPIService.getBookNameFromId(bookId);
+          verses = await BibleAPIService.getChapterWithCommentary(bookName, chapter);
+        } catch (apiError) {
+          console.warn("Failed to fetch from external API:", apiError);
+        }
+      }
+      
       res.json(verses);
     } catch (error) {
       console.error("Error fetching Bible verses:", error);

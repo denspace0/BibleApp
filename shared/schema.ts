@@ -57,6 +57,7 @@ export const bibleVerses = pgTable("bible_verses", {
   textEnglish: text("text_english").notNull(),
   textTagalog: text("text_tagalog"),
   translation: varchar("translation").default("ESV"),
+  commentary: text("commentary"),
 });
 
 // User bookmarks table

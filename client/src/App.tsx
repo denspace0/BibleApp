@@ -36,6 +36,13 @@ function Router() {
       ) : (
         <>
           <Route path="/" component={Home} />
+          <Route path="/book/:bookId" component={Home} />
+          <Route path="/book/:bookId/:chapter" component={Home} />
+          <Route path="/read" component={Home} />
+          <Route path="/search" component={Home} />
+          <Route path="/daily" component={Home} />
+          <Route path="/prayer" component={Home} />
+          <Route path="/bookmarks" component={Home} />
           <Route component={NotFound} />
         </>
       )}
