@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 98%);
+  --foreground: hsl(222, 84%, 4.9%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(222, 84%, 4.9%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(222, 84%, 4.9%);
+  --primary: hsl(220, 86%, 60%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(262, 85%, 58%);
+  --secondary-foreground: hsl(0, 0%, 100%);
+  --muted: hsl(220, 14%, 96%);
+  --muted-foreground: hsl(220, 9%, 46%);
+  --accent: hsl(220, 14%, 96%);
+  --accent-foreground: hsl(220, 9%, 15%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(220, 13%, 91%);
+  --input: hsl(220, 13%, 91%);
+  --ring: hsl(220, 86%, 60%);
+  --radius: 0.75rem;
+  --bible-primary: hsl(220, 86%, 60%);
+  --bible-secondary: hsl(262, 85%, 58%);
+  --bible-accent: hsl(0, 84%, 60%);
+  --font-inter: 'Inter', sans-serif;
+}
+
+.dark {
+  --background: hsl(222, 84%, 4.9%);
+  --foreground: hsl(210, 40%, 98%);
+  --card: hsl(222, 84%, 8%);
+  --card-foreground: hsl(210, 40%, 98%);
+  --popover: hsl(222, 84%, 4.9%);
+  --popover-foreground: hsl(210, 40%, 98%);
+  --primary: hsl(220, 86%, 60%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(262, 85%, 58%);
+  --secondary-foreground: hsl(0, 0%, 100%);
+  --muted: hsl(217, 32%, 17%);
+  --muted-foreground: hsl(215, 20%, 65%);
+  --accent: hsl(217, 32%, 17%);
+  --accent-foreground: hsl(210, 40%, 98%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(217, 32%, 17%);
+  --input: hsl(217, 32%, 17%);
+  --ring: hsl(220, 86%, 60%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-inter antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-inter;
+  }
+}
+
+@layer utilities {
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.2s ease-in;
+  }
+  
+  .text-bible-primary {
+    color: var(--bible-primary);
+  }
+  
+  .text-bible-secondary {
+    color: var(--bible-secondary);
+  }
+  
+  .text-bible-accent {
+    color: var(--bible-accent);
+  }
+  
+  .bg-bible-primary {
+    background-color: var(--bible-primary);
+  }
+  
+  .bg-bible-secondary {
+    background-color: var(--bible-secondary);
+  }
+  
+  .bg-bible-accent {
+    background-color: var(--bible-accent);
+  }
+  
+  .border-bible-primary {
+    border-color: var(--bible-primary);
+  }
+  
+  .hover\:text-bible-primary:hover {
+    color: var(--bible-primary);
+  }
+  
+  .hover\:text-bible-secondary:hover {
+    color: var(--bible-secondary);
+  }
+  
+  .hover\:bg-bible-primary\/10:hover {
+    background-color: hsla(var(--bible-primary), 0.1);
+  }
+  
+  .bg-bible-primary\/10 {
+    background-color: hsla(var(--bible-primary), 0.1);
+  }
+  
+  .bg-bible-secondary\/10 {
+    background-color: hsla(var(--bible-secondary), 0.1);
+  }
+}
+
+@keyframes slideUp {
+  from { 
+    transform: translateY(20px); 
+    opacity: 0; 
+  }
+  to { 
+    transform: translateY(0); 
+    opacity: 1; 
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Custom scrollbar styles */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground));
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary));
+}
+
+/* Verse highlighting styles */
+.verse-highlight-yellow {
+  @apply bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-400 pl-4 py-2 rounded-r;
+}
+
+.verse-highlight-blue {
+  @apply bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-400 pl-4 py-2 rounded-r;
+}
+
+.verse-highlight-green {
+  @apply bg-green-50 dark:bg-green-900/20 border-l-4 border-green-400 pl-4 py-2 rounded-r;
+}
+
+.verse-highlight-pink {
+  @apply bg-pink-50 dark:bg-pink-900/20 border-l-4 border-pink-400 pl-4 py-2 rounded-r;
+}
+
+/* Reading text styles */
+.reading-text {
+  line-height: 1.8;
+  font-size: var(--reading-font-size, 18px);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(to right, var(--bible-primary), var(--bible-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
